@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İYİ Kİ SEVGİLİMSİN ❤️</title>
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #ff4d6d;
+            --secondary: #ff8fa3;
+            --dark: #000000;
+            --glass: rgba(255, 255, 255, 0.05);
+            --purple-accent: rgba(94, 1, 97, 0.85);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            background: var(--dark);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- CANLI ARKA PLAN (YILDIZLAR) --- */
+        #star-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; background: radial-gradient(circle at center, #1b1b1b 0%, #000 100%);
+        }
+
+        /* --- MÜZİK PLAYER (PREMIUM) --- */
+        #music-bar {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            z-index: 9999; background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(15px); padding: 12px 30px;
+            border-radius: 100px; border: 1px solid var(--primary);
+            display: none; align-items: center; gap: 15px;
+            box-shadow: 0 0 30px rgba(255, 77, 109, 0.4);
+        }
+
+        .bar-anim { width: 15px; height: 15px; border-radius: 50%; background: var(--primary); animation: pulse 1.5s infinite; }
+        .song-name { font-size: 0.9rem; font-weight: 600; color: var(--secondary); white-space: nowrap; }
+
+        /* --- GİRİŞ PANELİ --- */
+        #login-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; display: flex; justify-content: center; align-items: center;
+            z-index: 10000; transition: 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        .glass-box {
+            background: var(--glass); padding: 60px; border-radius: 40px;
+            border: 1px solid rgba(255, 77, 109, 0.3); text-align: center;
+            backdrop-filter: blur(20px); box-shadow: 0 0 100px rgba(255, 77, 109, 0.1);
+        }
+
+        input {
+            background: transparent; border: none; border-bottom: 2px solid var(--primary);
+            padding: 10px; color: white; width: 250px; text-align: center;
+            font-size: 1.3rem; outline: none; margin-bottom: 30px;
+        }
+
+        /* --- ANA İÇERIK --- */
+        #content { display: none; }
+
+        .hero {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+        }
+
+        .hero h1 { font-family: 'Dancing Script', cursive; font-size: 4.5rem; margin: 0; text-shadow: 0 0 30px var(--primary); }
+
+        .photo-section {
+            max-width: 500px; margin: 0 auto 150px auto;
+            position: relative; padding: 20px;
+        }
+
+        .photo-frame {
+            position: relative; z-index: 1; overflow: hidden;
+            border-radius: 20px; border: 3px solid rgba(255,255,255,0.2);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.9);
+        }
+
+        .photo-frame img { width: 100%; transition: 0.8s; display: block; }
+        .photo-frame:hover img { transform: scale(1.05); }
+
+        .text-card {
+            background: var(--purple-accent);
+            padding: 25px; border-radius: 15px;
+            margin-top: -40px; position: relative; z-index: 2;
+            border-left: 5px solid var(--primary);
+            backdrop-filter: blur(10px); line-height: 1.7;
+        }
+
+        /* --- EMOJI & PARILTI --- */
+        .sparkle { position: fixed; pointer-events: none; z-index: 999; animation: fly 4s linear infinite; }
+        @keyframes fly { 
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+        }
+
+        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.7); } 70% { transform: scale(1.2); box-shadow: 0 0 0 15px rgba(255, 77, 109, 0); } 100% { transform: scale(1); } }
+    </style>
+</head>
+<body>
+
+    <div id="star-canvas"></div>
+
+    <div id="music-bar">
+        <div class="bar-anim"></div>
+        <span class="song-name">🎵 BİZİM SARKIMIZ: MA CHÉRIE</span>
+    </div>
+
+    <div id="login-screen">
+        <div class="glass-box">
+            <h2 style="font-family: 'Dancing Script'; font-size: 3rem; color: var(--primary);">Özel GİRİS ❤️</h2>
+            <p>Özel tarihimizi girer misin bitaneemmmm?</p>
+            <input type="text" id="pw" placeholder="GG.AA.YYYY">
+            <br>
+            <button onclick="openSite()" style="background: var(--primary); color: white; border: none; padding: 15px 40px; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.3s;">Aç Bakalım bitaneemmmm ✨</button>
+        </div>
+    </div>
+
+    <div id="content">
+        <section class="hero">
+            <h1 data-aos="zoom-in">İyi ki Varsın Berensum...</h1>
+            <p data-aos="fade-up" data-aos-delay="800" id="typing-text" style="font-size: 1.2rem; color: var(--secondary);"></p>
+        </section>
+
+        <div class="photo-section" data-aos="fade-up">
+            <div class="photo-frame"><img src="ilk.jpeg" alt="ilk date"></div>
+            <div class="text-card">
+                <h3 style="color: var(--primary); margin-top: 0;">İlk Gün ✨</h3>
+                "Sevgili olduğumuz gun herseyın basladıgı gün cok tatliydi bitanem."
+            </div>
+        </div>
+
+        <div class="photo-section" data-aos="fade-left">
+            <div class="photo-frame"><img src="gülüs.jpeg" alt="BEBEGIM BENIM"></div>
+            <div class="text-card">
+                <h3 style="color: var(--primary); margin-top: 0;">Gülüşüne Kurban Olurum 😊</h3>
+                "bebegimmm tek bi gulumsemen bile beni dünyanın en mutlu insanı yapıyor gülüşüne ölürümggü."
+            </div>
+        </div>
+
+        <div class="photo-section" data-aos="fade-right">
+            <div class="photo-frame"><img src="el.jpeg" alt="ELİNİ TUTTUM"></div>
+            <div class="text-card">
+                <h3 style="color: var(--primary); margin-top: 0;">Elini Tutmayı Çok Seviyom 🤝</h3>
+                "Seninle el ele yürümeyeceğim tek bir yol yok berensuumm"
+            </div>
+        </div>
+
+        <div class="photo-section" data-aos="flip-up">
+            <div class="photo-frame"><img src="WhatsApp Image 2026-04-02 at 21.28.39.jpeg" alt="TAMTLİ FOTO"></div>
+            <div class="text-card">
+                <h3 style="color: var(--primary); margin-top: 0;">Her Şeyine Aşığım ✨</h3>
+                "Bebegim hep derim ama saçlarına gözlerine kokuna kaşlarına sesine DUDAKLARINA fotografta oldugu gibi kafanı yaslayısına ölürüm sana"
+            </div>
+        </div>
+
+        <div class="photo-section" data-aos="zoom-in">
+            <div class="photo-frame"><img src="gtm.jpeg" alt="gitme tm"></div>
+            <div class="text-card">
+                <h3 style="color: var(--primary); margin-top: 0;">Hiç Vazgeçmeyelim ❤️</h3>
+                "şu aralar bi garibiz bebegimm nolursa olsun vazgecmeylim tm ben sensiz yapamam güzel sevgilimmm"
+            </div>
+        </div>
+
+        <section class="hero" style="height: auto; padding-bottom: 100px;">
+            <div style="font-size: 8rem; animation: pulse 2s infinite;">💖</div>
+            <h1 style="font-size: 3.5rem;">Seni Çok Seviyorum</h1>
+            <div style="max-width: 700px; padding: 20px; line-height: 2; text-align: center; font-size: 1.1rem;">
+                Seniii çooookkk seviyorum benim en değerlimsın hayatımın merkezisin seninle tanıştığım için kendimi dünyanın en şanslı insanı olarak görüyorum iyi ki de gelmişsin girmişsin şenlendirmişsin bu saçma hayatı süslemişsin seni çok seviyorum her ne kadar GICIK etsen de seni herşeyinle seviyorum tribinle kavganla sinirinle gülüşünle kızmanla her şeyinle çok seviyorum seni güzellimmmm. 
+                <br><br>
+                <b>Sonsuza dek, seninle berensummmm</b>
+            </div>
+        </section>
+    </div>
+
+    <audio id="music" loop>
+        <source src="UZI - MA CHÉRIE feat. AKSAN (Lyrics).mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1200 });
+
+        function openSite() {
+            const pw = document.getElementById('pw').value;
+            if(pw === "20092025") { // ŞİFRE
+                document.getElementById('login-screen').style.transform = "scale(1.5) translateY(-100%)";
+                document.getElementById('login-screen').style.opacity = "0";
+                setTimeout(() => {
+                    document.getElementById('login-screen').style.display = "none";
+                    document.getElementById('content').style.display = "block";
+                    document.getElementById('music-bar').style.display = "flex";
+                    document.getElementById('music').play();
+                    typeWriter();
+                    startSparkles();
+                }, 1000);
+            } else { 
+                alert("ASKIM SİFREYİ NASI BİLMEZSIN YA ❤️"); 
+            }
+        }
+
+        function typeWriter() {
+            const text = "Sana küçük bir sürpriz hazırladım güzellimm, aşağıya kaydır...";
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    document.getElementById("typing-text").innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, 50);
+                }
+            }
+            type();
+        }
+
+        function startSparkles() {
+            const emojis = ['❤️', '💖', '✨', '💗', '🌸'];
+            setInterval(() => {
+                const s = document.createElement('div');
+                s.className = 'sparkle';
+                s.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+                s.style.left = Math.random() * 100 + "vw";
+                s.style.bottom = "-50px";
+                s.style.fontSize = Math.random() * 20 + 15 + "px";
+                s.style.animationDuration = (Math.random() * 2 + 3) + "s";
+                document.body.appendChild(s);
+                setTimeout(() => s.remove(), 5000);
+            }, 350);
+        }
+    </script>
+</body>
+</html>
